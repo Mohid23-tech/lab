@@ -165,6 +165,87 @@ public:
     }
 };
 
+int main() {
+    TasbeehCounter tasbeeh;
+    PrayerQueue prayerQueue;
+    StoryStack storyStack;
+    StudyPlanner planner;
+    int choice;
+    
+    cout << "\n=== Sacred Space - Islamic App ===\n";
+    do {
+        cout << "\n1. Add Zikr (Tasbeeh Counter)\n";
+        cout << "2. View Zikr History\n";
+        cout << "3. Add Prayer Reminder\n";
+        cout << "4. View Next Prayer\n";
+        cout << "5. Navigate to Prophet Story\n";
+        cout << "6. Go Back to Previous Story\n";
+        cout << "7. Add Study Task\n";
+        cout << "8. View Study Plan\n";
+        cout << "9. Exit\n";
+        cout << "Enter choice: ";
+        cin >> choice;
+        cin.ignore(); // Clear newline for getline
+        
+        switch (choice) {
+            case 1: {
+                string zikr;
+                int count;
+                cout << "Enter Zikr (e.g., SubhanAllah): ";
+                getline(cin, zikr);
+                cout << "Enter count: ";
+                cin >> count;
+                cin.ignore(); // Clear newline after count
+                tasbeeh.addZikr(zikr, count);
+                break;
+            }
+            case 2:
+                tasbeeh.displayZikrHistory();
+                break;
+            case 3: {
+                string prayer;
+                cout << "Enter prayer name (e.g., Fajr): ";
+                getline(cin, prayer);
+                prayerQueue.addPrayer(prayer);
+                break;
+            }
+            case 4:
+                prayerQueue.displayNextPrayer();
+                break;
+            case 5: {
+                string story;
+                cout << "Enter story title: ";
+                getline(cin, story);
+                storyStack.pushStory(story);
+                break;
+            }
+            case 6:
+                storyStack.popStory();
+                break;
+            case 7: {
+                string task;
+                int time;
+                cout << "Enter study task (e.g., Read Surah Yasin): ";
+                getline(cin, task);
+                cout << "Enter time (minutes): ";
+                cin >> time;
+                cin.ignore(); // Clear newline after time
+                planner.addTask(task, time);
+                break;
+            }
+            case 8:
+                planner.displayTasks();
+                break;
+            case 9:
+                cout << "Exiting Sacred Space.Until next time stay connected to your Deen. JazakAllah Khair!\n";
+                break;
+            default:
+                cout << "Invalid choice. Try again.\n";
+        }
+    } while (choice != 9);
+    
+    return 0;
+}
 
 
 
