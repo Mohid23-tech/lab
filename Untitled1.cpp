@@ -107,6 +107,63 @@ public:
     }
 };
 
+// Node for Binary Tree (Study Planner)
+struct StudyNode {
+    string task;
+    int studyTime;
+    StudyNode* left;
+    StudyNode* right;
+    StudyNode(string t, int time) : task(t), studyTime(time), left(NULL), right(NULL) {}
+};
+
+// Binary Tree for Study Planner
+class StudyPlanner {
+private:
+    StudyNode* root;
+    
+    void addTaskRec(StudyNode*& node, string task, int time) {
+        if (!node) {
+            node = new StudyNode(task, time);
+            cout << "Added Task: " << task << " (" << time << " mins)" << endl;
+            return;
+        }
+        addTaskRec(node->left, task, time); // Add to left for simplicity
+    }
+    
+    void displayRec(StudyNode* node) {
+        if (!node) return;
+        cout << "Task: " << node->task << ", Time: " << node->studyTime << " mins" << endl;
+        displayRec(node->left);
+        displayRec(node->right);
+    }
+    
+    void deleteTree(StudyNode* node) {
+        if (!node) return;
+        deleteTree(node->left);
+        deleteTree(node->right);
+        delete node;
+    }
+    
+public:
+    StudyPlanner() : root(NULL) {}
+    
+    void addTask(string task, int time) {
+        addTaskRec(root, task, time);
+    }
+    
+    void displayTasks() {
+        if (!root) {
+            cout << "\nNo study tasks assigned.\n";
+            return;
+        }
+        cout << "\nStudy Plan:\n";
+        displayRec(root);
+    }
+    
+    ~StudyPlanner() {
+        deleteTree(root);
+    }
+};
 
 
 
