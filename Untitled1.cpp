@@ -77,6 +77,35 @@ public:
     }
 };
 
+// Stack for Prophet Stories Navigation
+class StoryStack {
+private:
+    static const int MAX = 10; // Max stories
+    string stories[MAX];
+    int top;
+public:
+    StoryStack() : top(-1) {}
+    
+    bool isFull() { return top == MAX - 1; }
+    bool isEmpty() { return top == -1; }
+    
+    void pushStory(string story) {
+        if (isFull()) {
+            cout << "Story stack is full!" << endl;
+            return;
+        }
+        stories[++top] = story;
+        cout << "Navigated to: " << story << endl;
+    }
+    
+    void popStory() {
+        if (isEmpty()) {
+            cout << "No previous story to go back to." << endl;
+            return;
+        }
+        cout << "Back to: " << stories[top--] << endl;
+    }
+};
 
 
 
