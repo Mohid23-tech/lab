@@ -45,4 +45,62 @@ public:
         }
     }
 };
+// Queue for Prayer Reminders
+class PrayerQueue {
+private:
+    static const int MAX = 5; // For 5 daily prayers
+    string prayers[MAX];
+    int front, rear;
+public:
+    PrayerQueue() : front(-1), rear(-1) {}
+    
+    bool isFull() { return rear == MAX - 1; }
+    bool isEmpty() { return front == -1 || front > rear; }
+    
+    void addPrayer(string prayer) {
+        if (isFull()) {
+            cout << "Prayer queue is full!" << endl;
+            return;
+        }
+        if (isEmpty()) front = 0;
+        prayers[++rear] = prayer;
+        cout << "Added Prayer Reminder: " << prayer << endl;
+    }
+    
+    void displayNextPrayer() {
+        if (isEmpty()) {
+            cout << "No prayer reminders." << endl;
+            return;
+        }
+        cout << "Next Prayer: " << prayers[front++] << endl;
+        if (front > rear) front = rear = -1; // Reset if queue is empty
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
